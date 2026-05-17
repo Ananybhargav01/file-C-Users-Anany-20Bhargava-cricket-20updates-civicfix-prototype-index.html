@@ -326,6 +326,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const quickFileInput = document.getElementById('quick-file-input');
     const quickSuccessMsg = document.getElementById('quick-success-msg');
     const quickDesc = document.getElementById('quick-desc');
+    const quickStep1 = document.getElementById('quick-step-1');
+    const quickStep2 = document.getElementById('quick-step-2');
+    const btnQuickNext = document.getElementById('btn-quick-next');
     let selectedQuickIssue = "";
 
     if (quickOptions.length > 0) {
@@ -334,6 +337,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedQuickIssue = btn.getAttribute('data-issue');
                 quickModalTitle.textContent = selectedQuickIssue;
                 quickDesc.value = ""; // Clear previous description
+                
+                // Show Step 1, Hide Step 2
+                quickStep1.style.display = 'block';
+                quickStep2.style.display = 'none';
                 
                 quickRaiseModal.style.display = 'flex';
                 setTimeout(() => quickRaiseModal.classList.remove('hidden'), 50);
@@ -344,6 +351,13 @@ document.addEventListener('DOMContentLoaded', () => {
             btnCloseQuickModal.addEventListener('click', () => {
                 quickRaiseModal.classList.add('hidden');
                 setTimeout(() => quickRaiseModal.style.display = 'none', 300);
+            });
+        }
+        
+        if (btnQuickNext) {
+            btnQuickNext.addEventListener('click', () => {
+                quickStep1.style.display = 'none';
+                quickStep2.style.display = 'block';
             });
         }
 
