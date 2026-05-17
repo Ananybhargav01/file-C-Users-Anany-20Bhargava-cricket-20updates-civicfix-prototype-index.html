@@ -319,20 +319,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 9. Quick Complaint Logic
     const quickOptions = document.querySelectorAll('.quick-option-btn');
-    const quickPhotoUpload = document.getElementById('quick-photo-upload');
+    const quickRaiseModal = document.getElementById('quick-raise-modal');
+    const btnCloseQuickModal = document.getElementById('btn-close-quick-modal');
+    const quickModalTitle = document.getElementById('quick-modal-title');
+    const quickCameraInput = document.getElementById('quick-camera-input');
+    const quickFileInput = document.getElementById('quick-file-input');
     const quickSuccessMsg = document.getElementById('quick-success-msg');
+    const quickDesc = document.getElementById('quick-desc');
     let selectedQuickIssue = "";
 
-    if (quickOptions.length > 0 && quickPhotoUpload) {
+    if (quickOptions.length > 0) {
         quickOptions.forEach(btn => {
             btn.addEventListener('click', () => {
                 selectedQuickIssue = btn.getAttribute('data-issue');
-                quickPhotoUpload.click(); // Trigger file upload directly
+                quickModalTitle.textContent = selectedQuickIssue;
+                quickDesc.value = ""; // Clear previous description
+                
+                quickRaiseModal.style.display = 'flex';
+                setTimeout(() => quickRaiseModal.classList.remove('hidden'), 50);
             });
         });
 
-        quickPhotoUpload.addEventListener('change', (e) => {
+        if (btnCloseQuickModal) {
+            btnCloseQuickModal.addEventListener('click', () => {
+                quickRaiseModal.classList.add('hidden');
+                setTimeout(() => quickRaiseModal.style.display = 'none', 300);
+            });
+        }
+
+        const handleQuickRaiseSubmit = (e) => {
             if (e.target.files && e.target.files[0]) {
+                // Close modal
+                quickRaiseModal.classList.add('hidden');
+                setTimeout(() => quickRaiseModal.style.display = 'none', 300);
+                
                 document.getElementById('space-bg').style.transform = "scale(1.1)";
                 setTimeout(() => document.getElementById('space-bg').style.transform = "", 1500);
 
@@ -360,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentNat += 1;
                         natReg.textContent = currentNat.toLocaleString('en-IN');
                         
-                        quickPhotoUpload.value = ""; // Reset
+                        e.target.value = ""; // Reset file input
                     }, 500);
                 };
 
@@ -380,7 +400,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     processRegistration(`REGISTERED SUCCESSFULLY`);
                 }
             }
-        });
+        };
+
+        if (quickCameraInput) quickCameraInput.addEventListener('change', handleQuickRaiseSubmit);
+        if (quickFileInput) quickFileInput.addEventListener('change', handleQuickRaiseSubmit);
     }
 
 });

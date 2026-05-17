@@ -210,7 +210,6 @@
                                 <span>Encroachment</span>
                             </button>
                         </div>
-                        <input type="file" id="quick-photo-upload" accept="image/*" style="display:none;">
                         <div id="quick-success-msg" class="success-msg hidden" style="display: none; font-size: 0.85rem; padding: 0.75rem;">
                             <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                             REGISTERED SUCCESSFULLY
@@ -322,6 +321,34 @@
                                     <p>Issue has been resolved.</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Quick Raise Modal -->
+            <div class="quick-raise-modal-overlay hidden" id="quick-raise-modal" style="display: none;">
+                <div class="quick-raise-modal glass-panel">
+                    <div class="modal-header">
+                        <h3 id="quick-modal-title">Issue Details</h3>
+                        <button class="close-btn" id="btn-close-quick-modal">×</button>
+                    </div>
+                    <div class="quick-modal-body">
+                        <div class="input-group">
+                            <label for="quick-desc">Issue Description</label>
+                            <textarea id="quick-desc" rows="3" placeholder="Please describe the specific issue (e.g. pole number, landmark)..."></textarea>
+                        </div>
+                        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Attach Evidence</label>
+                        <div class="upload-options-grid">
+                            <label class="upload-option-card">
+                                <input type="file" accept="image/*" capture="environment" class="hidden-input" id="quick-camera-input">
+                                <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                <span class="upload-option-text">Camera</span>
+                            </label>
+                            <label class="upload-option-card">
+                                <input type="file" accept="image/*" class="hidden-input" id="quick-file-input">
+                                <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                <span class="upload-option-text">Upload</span>
+                            </label>
                         </div>
                     </div>
                 </div>
