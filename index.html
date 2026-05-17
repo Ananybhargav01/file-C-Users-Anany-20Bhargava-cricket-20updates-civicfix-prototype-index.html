@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIVICFIX INDIA</title>
+    <!-- Google Fonts for typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css?v=20">
+</head>
+
+<body>
+    <!-- Animated Space Background -->
+    <div id="space-bg"></div>
+    <div class="crystal-overlay"></div>
+
+    <!-- UI Overlay -->
+    <div class="overlay-container">
+        <!-- Header -->
+        <header class="main-header" id="main-header">
+            <h1 class="logo-text">CIVICFIX <span class="highlight">INDIA</span></h1>
+            <p class="subtitle">SOLUTION AT FINGERTIP</p>
+        </header>
+
+        <!-- Glassmorphism Form Container -->
+        <main class="glass-panel" id="auth-panel">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" id="tab-login">Login</button>
+                <button class="tab-btn" id="tab-register">Register</button>
+            </div>
+
+            <!-- Login Section -->
+            <div class="form-section active" id="sec-login">
+                <form id="form-login">
+                    <div class="input-group">
+                        <label for="login-name">Full Name</label>
+                        <input type="text" id="login-name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-mobile">Mobile Number</label>
+                        <input type="tel" id="login-mobile" placeholder="Enter 10-digit mobile number" maxlength="10" minlength="10" pattern="[0-9]{10}"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 10)" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-pincode">Pin Code</label>
+                        <input type="text" id="login-pincode" placeholder="e.g. 110001" maxlength="6" minlength="6" pattern="[0-9]{6}"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6)" required>
+                    </div>
+                    <!-- OTP Box naturally hidden -->
+                    <div class="input-group hidden" id="otp-group" style="display: none;">
+                        <label for="login-otp">Enter OTP</label>
+                        <input type="text" id="login-otp" placeholder="• • • • • •" maxlength="6"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6)">
+                    </div>
+                    <button type="submit" class="action-btn" id="btn-login-action">Request OTP</button>
+                </form>
+            </div>
+
+            <!-- Register Section -->
+            <div class="form-section hidden" id="sec-register" style="display: none;">
+                <form id="form-register">
+                    <div class="input-group">
+                        <label for="reg-mobile">Mobile Number</label>
+                        <input type="tel" id="reg-mobile" placeholder="Enter 10-digit mobile number" maxlength="10" minlength="10" pattern="[0-9]{10}"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 10)" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-name">Full Name</label>
+                        <input type="text" id="reg-name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-pincode">Pin Code</label>
+                        <input type="text" id="reg-pincode" placeholder="e.g. 110001" maxlength="6" minlength="6" pattern="[0-9]{6}"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6)" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-aadhaar">Aadhar Card (Optional)</label>
+                        <input type="text" id="reg-aadhaar" placeholder="XXXX XXXX XXXX" maxlength="14"
+                            oninput="this.value = this.value.replace(/[^0-9A-Za-z]/g, '').substring(0, 14)">
+                    </div>
+                    <button type="submit" class="action-btn" id="btn-register-action">Register</button>
+                </form>
+            </div>
+        </main>
+
+        <!-- Dashboard Container -->
+        <main class="dashboard-container hidden" id="dashboard-container" style="display: none;">
+            <!-- Top Navigation -->
+            <nav class="dashboard-nav">
+                <div class="nav-left-group">
+                    <div class="profile-section" id="btn-profile">
+                        <div class="profile-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
+                        <span id="nav-profile-name">Profile</span>
+                    </div>
+                </div>
+                <h2 class="dash-logo">CIVICFIX <span class="highlight">INDIA</span></h2>
+                <div class="nav-right-group">
+                    <button class="nav-track-btn" id="btn-track">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        TRACK
+                    </button>
+                </div>
+            </nav>
+
+            <div class="dashboard-content">
+                <!-- Personal Stats Section -->
+                <div class="stats-container">
+                    <h3 class="section-title">Your Complaints</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card glass-panel">
+                            <h3>Registered</h3>
+                            <div class="stat-value text-accent" id="dash-stat-registered">0</div>
+                        </div>
+                        <div class="stat-card glass-panel">
+                            <h3>Solved</h3>
+                            <div class="stat-value text-success" id="dash-stat-solved">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- National Stats Section -->
+                <div class="stats-container">
+                    <h3 class="section-title">Nationwide Impact</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card glass-panel">
+                            <h3>Total Registered</h3>
+                            <div class="stat-value text-accent" id="dash-stat-nat-registered">1,24,532</div>
+                        </div>
+                        <div class="stat-card glass-panel">
+                            <h3>Total Solved</h3>
+                            <div class="stat-value text-success" id="dash-stat-nat-solved">98,204</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Raise Complaint Section -->
+                <div class="complaint-container">
+                    <div class="complaint-section glass-panel">
+                        <h3>Raise a Complaint</h3>
+                        <form id="form-complaint">
+                            <div class="input-group">
+                                <label for="comp-desc">Description</label>
+                                <textarea id="comp-desc" rows="3" placeholder="Describe the civic issue..." required></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label>Photo Evidence</label>
+                                <div class="upload-options-grid">
+                                    <button type="button" class="upload-option-card" id="btn-open-camera">
+                                        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                        <span class="upload-option-text">Camera</span>
+                                    </button>
+                                    <label class="upload-option-card">
+                                        <input type="file" accept="image/*" class="hidden-input" id="comp-photo-upload">
+                                        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                        <span class="upload-option-text">Upload</span>
+                                    </label>
+                                </div>
+                                <div id="photo-preview" class="photo-preview hidden" style="display: none;">
+                                    <img id="captured-image" src="" alt="Captured Photo">
+                                    <button type="button" id="btn-retake" class="retake-btn">Retake / Remove</button>
+                                </div>
+                            </div>
+                            <button type="submit" class="action-btn">Submit Complaint</button>
+                            <div id="complaint-success-msg" class="success-msg hidden" style="display: none;">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                COMPLAINT REGISTERED SUCCESSFULLY
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Quick Raise Section -->
+                    <div class="quick-complaint-section glass-panel">
+                        <h3>Quick Raise</h3>
+                        <div class="quick-options-grid">
+                            <button class="quick-option-btn" data-issue="Electricity Issue">
+                                <span class="icon">⚡</span>
+                                <span>Electricity</span>
+                            </button>
+                            <button class="quick-option-btn" data-issue="Pothole">
+                                <span class="icon">🛣️</span>
+                                <span>Pothole</span>
+                            </button>
+                            <button class="quick-option-btn" data-issue="Cleaning and Waste">
+                                <span class="icon">🗑️</span>
+                                <span>Waste</span>
+                            </button>
+                            <button class="quick-option-btn" data-issue="Water Supply Issue">
+                                <span class="icon">🚰</span>
+                                <span>Water</span>
+                            </button>
+                        </div>
+                        <input type="file" id="quick-photo-upload" accept="image/*" style="display:none;">
+                        <div id="quick-success-msg" class="success-msg hidden" style="display: none; font-size: 0.85rem; padding: 0.75rem;">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            REGISTERED SUCCESSFULLY
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Modal -->
+            <div class="profile-modal-overlay hidden" id="profile-modal" style="display: none;">
+                <div class="profile-modal glass-panel">
+                    <div class="modal-header">
+                        <h3>User Profile</h3>
+                        <button class="close-btn" id="btn-close-profile">×</button>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-group">
+                            <span class="detail-label">Name</span>
+                            <span class="detail-value" id="modal-profile-name">-</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Mobile Number</span>
+                            <span class="detail-value" id="modal-profile-mobile">-</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Pin Code</span>
+                            <span class="detail-value" id="modal-profile-pincode">-</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Local Area</span>
+                            <span class="detail-value" id="modal-profile-location" style="font-size: 0.95rem;">Detecting...</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">City / Town</span>
+                            <span class="detail-value" id="modal-profile-city" style="font-size: 0.95rem;">Detecting...</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">District</span>
+                            <span class="detail-value" id="modal-profile-constituency" style="font-size: 0.95rem;">Detecting...</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">State</span>
+                            <span class="detail-value" id="modal-profile-state" style="font-size: 0.95rem;">Detecting...</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Complaints Raised</span>
+                            <span class="detail-value text-accent" id="modal-profile-raised">0</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Complaints Solved</span>
+                            <span class="detail-value text-success" id="modal-profile-solved">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camera Modal -->
+            <div class="camera-modal-overlay hidden" id="camera-modal" style="display: none;">
+                <div class="camera-modal glass-panel">
+                    <div class="modal-header">
+                        <h3>Capture Photo</h3>
+                        <button type="button" class="close-btn" id="btn-close-camera">×</button>
+                    </div>
+                    <div class="camera-container">
+                        <video id="camera-feed" autoplay playsinline></video>
+                        <canvas id="camera-canvas" style="display: none;"></canvas>
+                    </div>
+                    <button type="button" class="action-btn" id="btn-capture-photo">Take Photo</button>
+                </div>
+            </div>
+
+            <!-- Tracking Modal -->
+            <div class="tracking-modal-overlay hidden" id="tracking-modal" style="display: none;">
+                <div class="tracking-modal glass-panel">
+                    <div class="modal-header">
+                        <h3>Track Complaint</h3>
+                        <button type="button" class="close-btn" id="btn-close-tracking">×</button>
+                    </div>
+                    <div class="tracking-details">
+                        <div id="no-complaint-msg" style="text-align:center; color:var(--text-muted); padding:2rem 0;">
+                            No recent complaints found.
+                        </div>
+                        <div class="timeline hidden" id="complaint-timeline" style="display:none;">
+                            <div class="timeline-step completed">
+                                <div class="step-indicator"></div>
+                                <div class="step-content">
+                                    <h4>1. Submission</h4>
+                                    <p>Complaint registered successfully.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-step active">
+                                <div class="step-indicator"></div>
+                                <div class="step-content">
+                                    <h4>2. Received by Authority</h4>
+                                    <p>Forwarded to the concerned department.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-step pending">
+                                <div class="step-indicator"></div>
+                                <div class="step-content">
+                                    <h4>3. Work in Progress</h4>
+                                    <p>Action is being taken.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-step pending">
+                                <div class="step-indicator"></div>
+                                <div class="step-content">
+                                    <h4>4. Complaint Solved</h4>
+                                    <p>Issue has been resolved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>
