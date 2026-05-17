@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Validate mobile
             if (loginMobile.value.length === 10) {
                 btnLoginAction.innerHTML = "Sending OTP...";
+                
+                // Simulate SMS delay
                 setTimeout(() => {
                     otpGroup.style.display = 'block';
                     setTimeout(() => otpGroup.classList.remove('hidden'), 50);
@@ -61,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Verify OTP logic
             const otpCode = document.getElementById('login-otp').value;
-            if (otpCode.length >= 4) {
+            if (otpCode.length >= 4) { // Accept any random code 4+ digits
                 btnLoginAction.innerHTML = "Verifying...";
                 setTimeout(() => {
                     alert("Login Successful! Welcome to CivicFix India.");
@@ -334,30 +336,49 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('space-bg').style.transform = "scale(1.1)";
                 setTimeout(() => document.getElementById('space-bg').style.transform = "", 1500);
 
-                setTimeout(() => {
-                    // Show success message
-                    if (quickSuccessMsg) {
-                        quickSuccessMsg.style.display = 'flex';
-                        setTimeout(() => quickSuccessMsg.classList.remove('hidden'), 50);
+                const processRegistration = (locationText) => {
+                    setTimeout(() => {
+                        // Show success message
+                        if (quickSuccessMsg) {
+                            quickSuccessMsg.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ${locationText}`;
+                            quickSuccessMsg.style.display = 'flex';
+                            setTimeout(() => quickSuccessMsg.classList.remove('hidden'), 50);
+                            
+                            setTimeout(() => {
+                                quickSuccessMsg.classList.add('hidden');
+                                setTimeout(() => quickSuccessMsg.style.display = 'none', 300);
+                            }, 4000);
+                        }
+
+                        // Update stats
+                        currentUser.complaintsRaised += 1;
+                        document.getElementById('dash-stat-registered').textContent = currentUser.complaintsRaised;
+                        document.getElementById('modal-profile-raised').textContent = currentUser.complaintsRaised;
+
+                        const natReg = document.getElementById('dash-stat-nat-registered');
+                        let currentNat = parseInt(natReg.textContent.replace(/,/g, ''));
+                        currentNat += 1;
+                        natReg.textContent = currentNat.toLocaleString('en-IN');
                         
-                        setTimeout(() => {
-                            quickSuccessMsg.classList.add('hidden');
-                            setTimeout(() => quickSuccessMsg.style.display = 'none', 300);
-                        }, 3000);
-                    }
+                        quickPhotoUpload.value = ""; // Reset
+                    }, 500);
+                };
 
-                    // Update stats
-                    currentUser.complaintsRaised += 1;
-                    document.getElementById('dash-stat-registered').textContent = currentUser.complaintsRaised;
-                    document.getElementById('modal-profile-raised').textContent = currentUser.complaintsRaised;
-
-                    const natReg = document.getElementById('dash-stat-nat-registered');
-                    let currentNat = parseInt(natReg.textContent.replace(/,/g, ''));
-                    currentNat += 1;
-                    natReg.textContent = currentNat.toLocaleString('en-IN');
-                    
-                    quickPhotoUpload.value = ""; // Reset
-                }, 1000);
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const lat = position.coords.latitude.toFixed(4);
+                            const lon = position.coords.longitude.toFixed(4);
+                            processRegistration(`REGISTERED (LOC: ${lat}, ${lon})`);
+                        },
+                        (error) => {
+                            processRegistration(`REGISTERED (Location Denied)`);
+                        },
+                        { timeout: 5000 }
+                    );
+                } else {
+                    processRegistration(`REGISTERED SUCCESSFULLY`);
+                }
             }
         });
     }
